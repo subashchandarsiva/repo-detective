@@ -83,8 +83,8 @@ API Endpoints We Will Be Working With:
 
 https://api.github.com/users
 
-https://api.github.com/search/users?q=brad
+https://api.github.com/search/users?q=subashchandarsiva
 
-https://api.github.com/users/bradtraversy
+https://api.github.com/users/subashchandarsiva
 
-https://api.github.com/users/bradtraversy/repos
+https://api.github.com/users/subashchandarsiva/repos
