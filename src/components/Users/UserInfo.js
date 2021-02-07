@@ -1,16 +1,21 @@
-import React, { Component } from 'react';
+import React, { useContext, useEffect } from 'react';
 import {Spinner} from '../Layouts/Spinner'
 import {Link} from 'react-router-dom'
 import { RepoItem } from '../Repos/RepoItems';
+import githubContext from '../../context/github/githubContext';
 
-export class UserInfo extends Component{
-    componentDidMount(){
-        this.props.GetUser(this.props.match.params.login)
-        this.props.getUserRepos(this.props.match.params.login)
-    }
-    render(){
-      const {name,avatar_url,location,bio,blog,company,html_url,followers,following,public_gists,hireable,login,public_repos}= this.props.userInfo
-        const {loading,repos} = this.props;
+const UserInfo =({match})=>{
+    
+    const context = useContext(githubContext)
+
+    const {GetUser,loading,user,repos,getUserRepos} = context
+
+    useEffect(()=>{
+        GetUser(match.params.login)
+        getUserRepos(match.params.login)
+        //eslint-disable-next-line
+    },[])
+      const {name,avatar_url,location,bio,blog,company,html_url,followers,following,public_gists,hireable,login,public_repos}= user
        
        if(loading) return <Spinner />
        
@@ -53,5 +58,7 @@ export class UserInfo extends Component{
             </div>
             <RepoItem repos={repos} />
         </>)
-    }
+    
 }
+
+export default UserInfo;
